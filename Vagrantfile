@@ -16,13 +16,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 1024
   end
 
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
-
+  config.vm.network :forwarded_port, guest: 9000, host: 9000
+  config.vm.network :forwarded_port, guest: 9001, host: 9001 
+  config.vm.network :forwarded_port, guest: 9999, host: 9999
+  
   config.vm.provision "shell", path: "puppet/manifests/puppet.sh"
   
   config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = 'puppet/manifests'
     puppet.module_path = 'puppet/modules'
+    puppet.manifests_path = 'puppet/manifests'
   end
 
 
